@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Expediente - Mascotas Veterinaria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #e0f7fa; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .container { background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); width: 100%; max-width: 500px; }
+        .logo { width: 80px; height: 80px; object-fit: contain; margin: 0 auto 20px; border-radius: 12px; background: #f5f9ff; padding: 8px; box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15); display: block; }
+        h2 { color: #0277bd; text-align: center; margin-bottom: 24px; font-weight: 700; }
+        .message { padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .error { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
+        .success { background-color: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+        label { display: block; margin: 16px 0 8px; font-weight: 600; color: #34495e; }
+        input, select, textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; font-size: 16px; }
+        button { width: 100%; padding: 14px; background: #0288d1; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 16px; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #0288d1; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Logo" class="logo">
+        <h2>Crear Expediente de Mascota</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message {{ 'error' if category == 'error' else 'success' }}">
+                        {% if category == 'error' %}<i class="fas fa-exclamation-circle"></i>{% else %}<i class="fas fa-check-circle"></i>{% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <label for="mascota_id">Selecciona la mascota *</label>
+            <select id="mascota_id" name="mascota_id" required>
+                <option value="">-- Selecciona mascota --</option>
+                {% for m in mascotas %}
+                    <option value="{{ m.id }}">{{ m.nombre }} (Dueño: {{ m.cliente_nombre }})</option>
+                {% endfor %}
+            </select>
+
+            <label for="especie">Especie *</label>
+            <select id="especie" name="especie" required>
+                <option value="">-- Selecciona --</option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+                <option value="Ave">Ave</option>
+                <option value="Roedor">Roedor</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <label for="raza">Raza</label>
+            <input type="text" id="raza" name="raza" placeholder="Labrador, Persa, etc.">
+
+            <label for="edad">Edad (años)</label>
+            <input type="number" id="edad" name="edad" min="0" max="30" placeholder="3">
+
+            <label for="peso">Peso (kg)</label>
+            <input type="number" id="peso" name="peso" step="0.1" min="0" placeholder="12.5">
+
+            <button type="submit">
+                <i class="fas fa-paw"></i> Crear Expediente
+            </button>
+        </form>
+
+        <a href="/bienvenido" class="back-link">← Volver al panel</a>
+    </div>
+</body>
+</html>

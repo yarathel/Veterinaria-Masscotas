@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Citas del Veterinario{% endblock %}
+
+{% block content %}
+<h2>Citas de Hoy</h2>
+
+<a href="{{ url_for('crear_expediente') }}">Crear expediente</a>
+<br><br>
+
+<table border="1">
+    <tr>
+        <th>Hora</th>
+        <th>Cliente</th>
+        <th>Mascota</th>
+        <th>Motivo</th>
+    </tr>
+
+    {% for c in citas %}
+    <tr>
+        <td>{{ c.hora_str }}</td>
+        <td>{{ c.cliente }}</td>
+        <td>{{ c.mascota }}</td>
+        <td>{{ c.motivo }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

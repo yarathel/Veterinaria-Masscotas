@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar Cita</title>
+</head>
+<body>
+    <h2>Agendar Cita</h2>
+    <form method="POST">
+        <label>Nombre de la Mascota:</label>
+        <input type="text" name="mascota" required>
+
+        <label>Tipo de Mascota:</label>
+        <select name="tipo" required>
+            <option>Perro</option>
+            <option>Gato</option>
+            <option>Ave</option>
+            <option>Otro</option>
+        </select>
+
+        <label>Veterinario:</label>
+        <select name="veterinario" required>
+            {% for v in veterinarios %}
+            <option value="{{ v.id }}">{{ v.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Fecha:</label>
+        <input type="date" name="fecha" required>
+
+        <label>Hora:</label>
+        <select name="hora" required>
+            {% for h in horarios %}
+            <option value="{{ h }}">{{ h }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Confirmar Cita</button>
+    </form>
+</body>
+</html>

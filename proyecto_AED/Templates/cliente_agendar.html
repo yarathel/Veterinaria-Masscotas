@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agendar Cita</title>
+</head>
+<body>
+    <h2>Agendar Cita</h2>
+
+    {% with messages=get_flashed_messages() %}
+    {% if messages %}
+        <p style="color:green">{{ messages[0] }}</p>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label>Mascota:</label>
+        <input type="text" name="mascota" required>
+
+        <label>Fecha:</label>
+        <input type="date" name="fecha" required>
+
+        <label>Hora:</label>
+        <input type="time" name="hora" required>
+
+        <label>Veterinario:</label>
+        <select name="veterinario">
+            {% for v in veterinarios %}
+            <option value="{{ v.id }}">{{ v.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <button>Agendar</button>
+    </form>
+
+</body>
+</html>

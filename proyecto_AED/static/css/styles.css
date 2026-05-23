@@ -1,0 +1,56 @@
+:root{
+  --bg:#fbfbfb;
+  --panel:#fff;
+  --accent:#0b72ff;
+  --danger:#d9534f;
+  --muted:#777;
+  --border:#ddd;
+  --excel-row:#f7f9fc;
+}
+
+*{box-sizing:border-box}
+body{font-family:Inter, system-ui, Arial, sans-serif;margin:0;background:var(--bg);color:#222}
+.container{max-width:1100px;margin:20px auto;padding:16px}
+.topbar{background:#0f1724;color:#fff;padding:12px 0;box-shadow:0 2px 6px rgba(5,5,10,0.08)}
+.topbar .container{display:flex;align-items:center;justify-content:space-between}
+.brand{margin:0;font-size:1.1rem}
+.topbar nav a{color:#cfe4ff;margin-left:14px;text-decoration:none;font-size:0.95rem}
+
+.panel{background:var(--panel);padding:16px;border:1px solid var(--border);border-radius:8px;box-shadow:0 2px 6px rgba(3,3,10,0.02)}
+.panel-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+
+.btn{padding:8px 12px;border-radius:6px;border:1px solid var(--border);cursor:pointer;background:#fff}
+.btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+.btn.danger{background:var(--danger);color:#fff;border-color:transparent}
+.btn:disabled{opacity:0.6;cursor:not-allowed}
+
+.table-wrap{overflow:auto}
+.excel-table{width:100%;border-collapse:collapse;font-family:Calibri,Segoe UI,Arial}
+.excel-table thead th{background:#e9f0ff;padding:10px;border:1px solid var(--border);text-align:left}
+.excel-table tbody td{padding:10px;border:1px solid var(--border);background:white}
+.excel-table tbody tr:nth-child(even) td{background:var(--excel-row)}
+.muted{text-align:center;color:var(--muted);padding:18px}
+
+/* modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);z-index:1000}
+.modal.hidden{display:none}
+.modal-content{background:var(--panel);padding:18px;border-radius:10px;min-width:320px;max-width:640px;border:1px solid var(--border)}
+.modal-content h3{margin-top:0}
+.modal-content form label{display:block;margin:8px 0;font-size:0.95rem}
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="password"]{width:100%;padding:8px;border:1px solid var(--border);border-radius:6px}
+
+.form-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+
+/* flashes */
+.flashes{margin-bottom:12px}
+.flash{padding:8px 12px;border-radius:6px;margin-bottom:6px}
+.flash.success{background:#e6ffed;color:#0a6b2a;border:1px solid #d4f6db}
+.flash.error{background:#ffe9e9;color:#8b1f1f;border:1px solid #ffd6d6}
+
+/* responsive */
+@media (max-width:640px){
+  .panel-row{flex-direction:column;gap:8px;align-items:flex-start}
+  .modal-content{width:92%}
+}

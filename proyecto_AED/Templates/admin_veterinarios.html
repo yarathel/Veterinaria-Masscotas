@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Administrar Veterinarios{% endblock %}
+
+{% block content %}
+<h2>Administración - Veterinarios</h2>
+
+<section class="panel">
+  <div class="panel-row">
+    <div>
+      <h3>Listado de veterinarios</h3>
+    </div>
+    <div>
+      <button id="btn-refresh" class="btn">Actualizar</button>
+      <button id="btn-open-add" class="btn primary">Añadir veterinario</button>
+    </div>
+  </div>
+
+  <div id="table-wrap" class="table-wrap">
+    <!-- La tabla se genera por JS -->
+    <table id="vets-table" class="excel-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Especialidad</th>
+          <th>Correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="6" class="muted">Cargando...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- FORMULARIO: Añadir veterinario (modal-like) -->
+<div id="add-modal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Añadir veterinario</h3>
+    <form id="add-form">
+      <label>Correo
+        <input name="correo" type="email" required />
+      </label>
+      <label>Nombre
+        <input name="nombre" type="text" required />
+      </label>
+      <label>Teléfono
+        <input name="telefono" type="text" required />
+      </label>
+      <label>Dirección
+        <input name="direccion" type="text" />
+      </label>
+      <label>Especialidad
+        <input name="especialidad" type="text" required />
+      </label>
+      <label>Contraseña (temporal)
+        <input name="password" type="password" required />
+      </label>
+
+      <div class="form-actions">
+        <button type="button" id="btn-cancel-add" class="btn">Cancelar</button>
+        <button type="submit" class="btn primary">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: Confirmar eliminación -->
+<div id="confirm-modal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Confirmar eliminación</h3>
+    <p>Para eliminar este veterinario escribe la palabra <strong>CONFIRMAR</strong> en el campo y presiona Eliminar.</p>
+    <input id="confirm-input" type="text" placeholder="Escribe CONFIRMAR" />
+    <div class="form-actions">
+      <button id="btn-cancel-confirm" class="btn">Cancelar</button>
+      <button id="btn-do-delete" class="btn danger" disabled>Eliminar</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
